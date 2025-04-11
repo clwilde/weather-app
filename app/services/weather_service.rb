@@ -4,9 +4,9 @@ class WeatherService
   # It requires a valid API key to function properly.
   # API key is stored in Rails credentials as openweather_api_key.
 
-  def retrieve_current(latitude, longitude)
+  def self.retrieve(latitude, longitude)
     response = connection.get("/data/2.5/weather", {
-      appid: Rails.application.credentials.openweather_api_key,
+      appid: ENV["OPENWEATHER_API_KEY"],
       lat: latitude,
       lon: longitude,
       units: "imperial"
@@ -18,7 +18,7 @@ class WeatherService
 
   private
 
-  def build_weather_object(body)
+  def self.build_weather_object(body)
     OpenStruct.new(
       temperature: body["main"]["temp"],
       temperature_min: body["main"]["temp_min"],
@@ -29,7 +29,7 @@ class WeatherService
     )
   end
 
-  def check_results(body)
+  def self.check_results(body)
     raise IOError.new("OpenWeather response failed") unless body
     raise IOError.new("OpenWeather main section is missing") unless body["main"]
     raise IOError.new("OpenWeather temperature is missing") unless body["main"]["temp"]
@@ -42,7 +42,7 @@ class WeatherService
     body
   end
 
-  def connection
+  def self.connection
     connection ||= Faraday.new("https://api.openweathermap.org") do |f|
       f.request :json # encode request bodies as JSON
       f.request :retry # retry failures
