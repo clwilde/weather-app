@@ -8,3 +8,14 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ th {
+   text-align: left;
+   font-weight: 800;
+ }
+
+  td {
+    text-align: left;
+    font-weight: 400;
+    padding-right: 15px;
+  }
