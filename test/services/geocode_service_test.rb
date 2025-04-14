@@ -1,7 +1,6 @@
-require 'test_helper'
+require "test_helper"
 
 class GeocodeServiceTest < ActiveSupport::TestCase
-
   test "call with known address" do
     address = "1 Infinite Loop, Cupertino, California 95014, USA"
 
@@ -11,5 +10,4 @@ class GeocodeServiceTest < ActiveSupport::TestCase
     assert_equal "us", geocode.country_code
     assert_equal "95014", geocode.postal_code
   end
-
 end
