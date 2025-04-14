@@ -10,7 +10,7 @@
 
 <% if defined?(@weather) %>
     <ul>
-        <li>Temperature: <%= @weather.current.temperature %> ℃</li>
+        <li>Temperature: <%= @weather.current.temperature %> ºF</li>
         <li>Humidity: <%= @weather.current.humidity %>%</li>
         <li>Pressure: <%= @weather.current.pressure %> millibars</li>
         <li>Description: <%= @weather.current.description %></li>
@@ -29,8 +29,8 @@
         <% @weather.daily.each do |day| %>
             <tr>
                 <td><%= day.date %></td>
-                <td><%= day.temperature_max %> ℃</td>
-                <td><%= day.temperature_min %> ℃</td>
+                <td><%= day.temperature_max %> ºF</td>
+                <td><%= day.temperature_min %> ºF</td>
                 <td><%= day.humidity %>%</td>
                 <td><%= day.pressure %> millibars</td>
                 <td><%= day.description %></td>
