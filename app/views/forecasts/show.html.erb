@@ -1,6 +1,6 @@
 <%= render "shared/flash" %>
 
-<h1>Forecast</h1>
+<h1>Weather</h1>
 
 <%= form_with(method: 'get', local: true) do %>
     <%= label :address, "What is your address?" %><br>
@@ -10,12 +10,31 @@
 
 <% if defined?(@weather) %>
     <ul>
-        <li>Temperature: <%= @weather.temperature %> ℃</li>
-        <li>Temperature Minimum: <%= @weather.temperature_min %> ℃</li>
-        <li>Temperature Maximum: <%= @weather.temperature_max %> ℃</li>
-        <li>Humidity: <%= @weather.humidity %>%</li>
-        <li>Pressure: <%= @weather.pressure %> millibars</li>
-        <li>Description: <%= @weather.description %></li>
+        <li>Temperature: <%= @weather.current.temperature %> ℃</li>
+        <li>Humidity: <%= @weather.current.humidity %>%</li>
+        <li>Pressure: <%= @weather.current.pressure %> millibars</li>
+        <li>Description: <%= @weather.current.description %></li>
         <li>Is this result from the cache? <%= @weather_cache_exist %>
     </ul>
+    <h2>Daily Forecast</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Humidity</th>
+            <th>Pressure</th>
+            <th>Description</th>
+        </tr>
+        <% @weather.daily.each do |day| %>
+            <tr>
+                <td><%= day.date %></td>
+                <td><%= day.temperature_max %> ℃</td>
+                <td><%= day.temperature_min %> ℃</td>
+                <td><%= day.humidity %>%</td>
+                <td><%= day.pressure %> millibars</td>
+                <td><%= day.description %></td>
+            </tr>
+        <% end %>
+    </table>
 <% end %>
